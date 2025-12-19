@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useFormStatus } from 'react-dom';
+import { Mail } from 'lucide-react';
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
@@ -18,7 +19,7 @@ const formSchema = z.object({
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" size="lg" disabled={pending} variant="secondary" className="bg-white text-primary hover:bg-white/90">
+    <Button type="submit" size="lg" disabled={pending} className="w-full sm:w-auto">
       {pending ? 'Subscribing...' : 'Subscribe'}
     </Button>
   );
@@ -52,31 +53,38 @@ export default function Newsletter() {
   }
 
   return (
-    <section className="bg-primary text-primary-foreground">
-      <div className="container py-8">
-        <div className="grid md:grid-cols-3 items-center gap-8">
-          <div className="md:col-span-1">
-              <h2 className="text-2xl font-bold font-headline">Subscribe Us</h2>
-          </div>
-          <div className="md:col-span-2">
+    <section className="bg-muted/40">
+      <div className="container py-12 md:py-16">
+        <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl">
+              Stay Ahead of the Curve
+            </h2>
+            <p className="mt-4 text-muted-foreground sm:text-xl">
+              Subscribe to our newsletter for the latest industry insights, trends, and exclusive content delivered right to your inbox.
+            </p>
+        </div>
+        <div className="mt-8 max-w-lg mx-auto">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center gap-2 p-1.5 rounded-lg bg-primary-foreground/20">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row items-start gap-4">
                 <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                    <FormItem className="flex-1">
+                    <FormItem className="flex-1 w-full">
                         <FormControl>
-                        <Input className="h-11 text-base bg-transparent border-0 text-primary-foreground placeholder:text-primary-foreground/80 focus-visible:ring-0 focus-visible:ring-offset-0" placeholder="Enter Email Address" {...field} />
+                          <div className="relative">
+                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            <Input className="h-12 pl-10 text-base" placeholder="Enter your email" {...field} />
+                          </div>
                         </FormControl>
-                        <FormMessage className="text-left text-destructive-foreground" />
+                        <FormMessage className="text-left" />
                     </FormItem>
                     )}
                 />
                 <SubmitButton />
                 </form>
             </Form>
-          </div>
+            <p className="text-xs text-muted-foreground mt-3 text-center">We respect your privacy. Unsubscribe at any time.</p>
         </div>
       </div>
     </section>
