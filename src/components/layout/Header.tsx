@@ -4,15 +4,19 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Mountain } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#projects", label: "Projects" },
-  { href: "#clients", label: "Clients" },
-  { href: "#contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/projects", label: "Projects" },
+  { href: "/clients", label: "Clients" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+  
   return (
     <header id="home" className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 max-w-screen-2xl items-center">
@@ -28,7 +32,10 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="transition-colors hover:text-foreground/80 text-foreground/60"
+                className={cn(
+                  "transition-colors hover:text-foreground/80",
+                  pathname === link.href ? "text-foreground" : "text-foreground/60"
+                )}
               >
                 {link.label}
               </Link>
@@ -58,7 +65,10 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-lg font-medium text-foreground/80 transition-colors hover:text-foreground"
+                className={cn(
+                  "text-lg font-medium transition-colors hover:text-foreground",
+                  pathname === link.href ? "text-foreground" : "text-foreground/80"
+                )}
               >
                 {link.label}
               </Link>
@@ -72,7 +82,7 @@ export default function Header() {
             {/* Can add a search bar here if needed */}
           </div>
           <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            <Link href="#contact">Get Started</Link>
+            <Link href="/contact">Get Started</Link>
           </Button>
         </div>
       </div>

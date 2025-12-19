@@ -13,7 +13,7 @@ import Newsletter from "@/components/landing/Newsletter";
 function Hero() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-image');
   return (
-    <section className="bg-muted/40 py-16 md:py-24 lg:py-32">
+    <section className="bg-background py-16 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           <div className="flex flex-col justify-center space-y-4">
@@ -27,13 +27,13 @@ function Hero() {
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               <Button asChild size="lg">
-                <Link href="#contact">
+                <Link href="/contact">
                   Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link href="#projects">
+                <Link href="/projects">
                   View Our Work
                 </Link>
               </Button>
@@ -63,9 +63,9 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <Newsletter />
         <Projects />
         <Clients />
-        <Newsletter />
         <Contact />
       </main>
       <Footer />
