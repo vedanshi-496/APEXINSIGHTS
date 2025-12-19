@@ -46,7 +46,7 @@ export default async function Clients() {
         </div>
         <Carousel
           opts={{
-            align: "start",
+            align: "center",
             loop: true,
           }}
           className="w-full"
@@ -60,8 +60,8 @@ export default async function Clients() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex"/>
-          <CarouselNext className="hidden sm:flex"/>
+          <CarouselPrevious className="hidden sm:flex left-[-50px]"/>
+          <CarouselNext className="hidden sm:flex right-[-50px]"/>
         </Carousel>
       </div>
     </section>

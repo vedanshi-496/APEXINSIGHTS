@@ -15,8 +15,8 @@ function Hero() {
   return (
     <section className="bg-background py-16 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
-        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:gap-16">
-          <div className="flex flex-col justify-center space-y-4">
+        <div className="grid gap-6 lg:grid-cols-1 lg:gap-12 xl:gap-16 place-items-center">
+          <div className="flex flex-col justify-center items-center space-y-4 text-center">
             <div className="space-y-4">
               <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none font-headline">
                 Innovative Solutions for a Digital World
@@ -39,7 +39,7 @@ function Hero() {
               </Button>
             </div>
           </div>
-          <div className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[500px]">
+          <div className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] w-full max-w-4xl">
             {heroImage && (
               <Image
                 src={heroImage.imageUrl}

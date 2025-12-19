@@ -56,8 +56,8 @@ export default function Newsletter() {
   return (
     <section className="bg-muted/40 py-16 md:py-24">
       <div className="container">
-        <div className="grid md:grid-cols-2 items-center gap-8">
-            <div className="max-w-lg">
+        <div className="grid md:grid-cols-1 items-center gap-8 text-center">
+            <div className="max-w-2xl mx-auto">
                 <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl">
                   Stay Ahead of the Curve
                 </h2>
@@ -65,7 +65,7 @@ export default function Newsletter() {
                   Subscribe to our newsletter for the latest industry insights, trends, and exclusive content delivered right to your inbox.
                 </p>
             </div>
-            <div className="">
+            <div className="max-w-2xl mx-auto w-full">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row items-start gap-4">
                     <FormField
@@ -86,7 +86,7 @@ export default function Newsletter() {
                     <SubmitButton />
                     </form>
                 </Form>
-                <p className="text-xs text-muted-foreground mt-3 text-center sm:text-left">We respect your privacy. Unsubscribe at any time.</p>
+                <p className="text-xs text-muted-foreground mt-3 text-center">We respect your privacy. Unsubscribe at any time.</p>
             </div>
         </div>
       </div>

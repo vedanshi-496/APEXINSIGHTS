@@ -14,8 +14,8 @@ export default function Contact() {
             Have a project in mind? We&apos;d love to hear from you. Fill out the form below to get started.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          <div className="relative h-96 md:h-full min-h-[400px] order-2 md:order-1">
+        <div className="grid md:grid-cols-1 gap-10 items-center justify-items-center">
+          <div className="relative h-96 md:h-full min-h-[400px] w-full max-w-2xl">
             {contactImage && (
               <Image
                 src={contactImage.imageUrl}
@@ -26,7 +26,7 @@ export default function Contact() {
               />
             )}
           </div>
-          <div className="order-1 md:order-2">
+          <div className="w-full max-w-2xl">
             <ContactForm />
           </div>
         </div>
