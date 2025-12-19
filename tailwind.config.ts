@@ -10,9 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['PT Sans', 'sans-serif'],
-        headline: ['Space Grotesk', 'sans-serif'],
-        code: ['monospace'],
+        sans: ['var(--font-manrope)', 'sans-serif'],
+        headline: ['Space Grotesk', 'sans-serif'], // Keeping this for admin panel
       },
       colors: {
         background: 'hsl(var(--background))',

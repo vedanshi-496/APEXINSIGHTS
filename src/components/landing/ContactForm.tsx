@@ -29,7 +29,7 @@ const formSchema = z.object({
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" className="w-full" disabled={pending}>
+    <Button type="submit" className="w-full font-semibold" size="lg" disabled={pending}>
       {pending ? 'Submitting...' : 'Submit'}
     </Button>
   );
@@ -66,7 +66,7 @@ export default function ContactForm() {
   }
 
   return (
-    <Card>
+    <Card className="shadow-lg">
         <CardContent className="p-6 md:p-8">
             <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

@@ -7,14 +7,14 @@ import { Star } from 'lucide-react';
 
 function ClientCard({ client }: { client: Client }) {
   return (
-    <Card className="h-full flex flex-col justify-between text-center p-6">
+    <Card className="h-full flex flex-col justify-between text-center p-8 bg-card shadow-lg rounded-xl">
        <div className="flex justify-center mb-4">
         {[...Array(5)].map((_, i) => (
           <Star key={i} className="h-5 w-5 text-yellow-400 fill-yellow-400" />
         ))}
       </div>
       <CardContent className="p-0 flex-grow">
-        <p className="text-muted-foreground italic">&quot;{client.description}&quot;</p>
+        <p className="text-muted-foreground italic text-base">&quot;{client.description}&quot;</p>
       </CardContent>
       <div className="mt-6">
         <Image
@@ -25,7 +25,7 @@ function ClientCard({ client }: { client: Client }) {
           className="rounded-full mx-auto mb-4"
           data-ai-hint={client.imageHint}
         />
-        <p className="font-semibold font-headline">{client.name}</p>
+        <p className="font-semibold text-lg">{client.name}</p>
         <p className="text-sm text-muted-foreground">{client.designation}</p>
       </div>
     </Card>
@@ -36,17 +36,17 @@ export default async function Clients() {
   const clients = await getClients();
 
   return (
-    <section id="clients" className="py-16 md:py-24">
+    <section id="clients" className="py-16 md:py-24 bg-background">
       <div className="container">
         <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-headline">What Our Happy Clients Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">What Our Happy Clients Say</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Their success is our success. We build strong relationships based on trust and exceptional results.
           </p>
         </div>
         <Carousel
           opts={{
-            align: "center",
+            align: "start",
             loop: true,
           }}
           className="w-full"
@@ -54,7 +54,7 @@ export default async function Clients() {
           <CarouselContent>
             {clients.map((client) => (
               <CarouselItem key={client.id} className="md:basis-1/2 lg:basis-1/3">
-                <div className="p-1 h-full">
+                <div className="p-2 h-full">
                   <ClientCard client={client} />
                 </div>
               </CarouselItem>
