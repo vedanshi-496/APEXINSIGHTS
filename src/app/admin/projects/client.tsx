@@ -46,7 +46,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
+} from '@/components/ui/alert-dialog';
 import {
   Form,
   FormControl,
@@ -57,7 +57,14 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 const projectSchema = z.object({
   name: z.string().min(3, 'Name must be at least 3 characters'),
@@ -68,27 +75,40 @@ const projectSchema = z.object({
 
 type ProjectFormValues = z.infer<typeof projectSchema>;
 
-function ProjectForm({ project, onOpenChange }: { project?: Project; onOpenChange: (open: boolean) => void }) {
+function ProjectForm({
+  project,
+  onOpenChange,
+}: {
+  project?: Project;
+  onOpenChange: (open: boolean) => void;
+}) {
   const { toast } = useToast();
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
-    defaultValues: project || {
-      name: '',
-      description: '',
-      imageUrl: '',
-      imageHint: '',
-    },
+    defaultValues:
+      project || {
+        name: '',
+        description: '',
+        imageUrl: '',
+        imageHint: '',
+      },
   });
 
   const onSubmit = async (values: ProjectFormValues) => {
-    const action = project ? updateProject(project.id, values) : addProject(values);
+    const action = project
+      ? updateProject(project.id, values)
+      : addProject(values);
     const result = await action;
 
     if (result.success) {
       toast({ title: `Project ${project ? 'updated' : 'added'} successfully.` });
       onOpenChange(false);
     } else {
-      toast({ variant: 'destructive', title: 'Error', description: result.message });
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: result.message,
+      });
     }
   };
 
@@ -101,7 +121,9 @@ function ProjectForm({ project, onOpenChange }: { project?: Project; onOpenChang
           render={({ field }) => (
             <FormItem>
               <FormLabel>Project Name</FormLabel>
-              <FormControl><Input {...field} /></FormControl>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -112,7 +134,9 @@ function ProjectForm({ project, onOpenChange }: { project?: Project; onOpenChang
           render={({ field }) => (
             <FormItem>
               <FormLabel>Description</FormLabel>
-              <FormControl><Textarea {...field} /></FormControl>
+              <FormControl>
+                <Textarea {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -123,13 +147,17 @@ function ProjectForm({ project, onOpenChange }: { project?: Project; onOpenChang
           render={({ field }) => (
             <FormItem>
               <FormLabel>Image URL</FormLabel>
-              <FormControl><Input {...field} /></FormControl>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <DialogFooter>
-          <DialogClose asChild><Button variant="ghost">Cancel</Button></DialogClose>
+          <DialogClose asChild>
+            <Button variant="ghost">Cancel</Button>
+          </DialogClose>
           <Button type="submit" disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting ? 'Saving...' : 'Save Project'}
           </Button>
@@ -142,14 +170,16 @@ function ProjectForm({ project, onOpenChange }: { project?: Project; onOpenChang
 export function ProjectsClient({ data }: { data: Project[] }) {
   const [isFormOpen, setIsFormOpen] = React.useState(false);
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = React.useState(false);
-  const [selectedProject, setSelectedProject] = React.useState<Project | undefined>(undefined);
+  const [selectedProject, setSelectedProject] = React.useState<
+    Project | undefined
+  >(undefined);
   const { toast } = useToast();
 
   const handleEdit = (project: Project) => {
     setSelectedProject(project);
     setIsFormOpen(true);
   };
-  
+
   const handleAdd = () => {
     setSelectedProject(undefined);
     setIsFormOpen(true);
@@ -163,10 +193,14 @@ export function ProjectsClient({ data }: { data: Project[] }) {
   const confirmDelete = async () => {
     if (!selectedProject) return;
     const result = await deleteProject(selectedProject.id);
-    if(result.success) {
-        toast({ title: "Project deleted successfully." });
+    if (result.success) {
+      toast({ title: 'Project deleted successfully.' });
     } else {
-        toast({ variant: "destructive", title: "Error", description: result.message });
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: result.message,
+      });
     }
     setIsDeleteAlertOpen(false);
     setSelectedProject(undefined);
@@ -180,34 +214,53 @@ export function ProjectsClient({ data }: { data: Project[] }) {
 
   return (
     <>
-      <div className="flex justify-end mb-4">
-        <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-            <DialogTrigger asChild>
-                <Button onClick={handleAdd}>
-                    <PlusCircle className="mr-2 h-4 w-4" /> Add Project
-                </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[525px]">
-                <DialogHeader>
-                    <DialogTitle className="font-headline">{selectedProject ? 'Edit Project' : 'Add New Project'}</DialogTitle>
-                    <DialogDescription>
-                        {selectedProject ? 'Update the details of your project.' : 'Fill in the details to add a new project.'}
-                    </DialogDescription>
-                </DialogHeader>
-                <ProjectForm project={selectedProject} onOpenChange={setIsFormOpen} />
-            </DialogContent>
-        </Dialog>
-      </div>
-
       <Card>
+        <CardHeader>
+          <CardTitle>Projects</CardTitle>
+          <CardDescription>
+            Manage your projects and their details.
+          </CardDescription>
+          <div className="flex justify-end">
+            <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+              <DialogTrigger asChild>
+                <Button onClick={handleAdd} size="sm" className="gap-1">
+                  <PlusCircle className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    Add Project
+                  </span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[525px]">
+                <DialogHeader>
+                  <DialogTitle className="font-headline">
+                    {selectedProject ? 'Edit Project' : 'Add New Project'}
+                  </DialogTitle>
+                  <DialogDescription>
+                    {selectedProject
+                      ? 'Update the details of your project.'
+                      : 'Fill in the details to add a new project.'}
+                  </DialogDescription>
+                </DialogHeader>
+                <ProjectForm
+                  project={selectedProject}
+                  onOpenChange={setIsFormOpen}
+                />
+              </DialogContent>
+            </Dialog>
+          </div>
+        </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="hidden w-[100px] sm:table-cell">Image</TableHead>
+                <TableHead className="hidden w-[100px] sm:table-cell">
+                  <span className="sr-only">Image</span>
+                </TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Description</TableHead>
-                <TableHead><span className="sr-only">Actions</span></TableHead>
+                <TableHead>
+                  <span className="sr-only">Actions</span>
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -223,19 +276,34 @@ export function ProjectsClient({ data }: { data: Project[] }) {
                     />
                   </TableCell>
                   <TableCell className="font-medium">{project.name}</TableCell>
-                  <TableCell className="hidden md:table-cell max-w-sm truncate">{project.description}</TableCell>
+                  <TableCell className="hidden md:table-cell max-w-sm truncate">
+                    {project.description}
+                  </TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button aria-haspopup="true" size="icon" variant="ghost">
+                        <Button
+                          aria-haspopup="true"
+                          size="icon"
+                          variant="ghost"
+                        >
                           <MoreHorizontal className="h-4 w-4" />
                           <span className="sr-only">Toggle menu</span>
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem onSelect={() => handleEdit(project)}>Edit</DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => handleDelete(project)} className="text-destructive">Delete</DropdownMenuItem>
+                        <DropdownMenuItem
+                          onSelect={() => handleEdit(project)}
+                        >
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onSelect={() => handleDelete(project)}
+                          className="text-destructive"
+                        >
+                          Delete
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -245,19 +313,24 @@ export function ProjectsClient({ data }: { data: Project[] }) {
           </Table>
         </CardContent>
       </Card>
-      
-      <AlertDialog open={isDeleteAlertOpen} onOpenChange={setIsDeleteAlertOpen}>
+
+      <AlertDialog
+        open={isDeleteAlertOpen}
+        onOpenChange={setIsDeleteAlertOpen}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the project
-              &quot;{selectedProject?.name}&quot;.
+              This action cannot be undone. This will permanently delete the
+              project &quot;{selectedProject?.name}&quot;.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmDelete}>Continue</AlertDialogAction>
+            <AlertDialogAction onClick={confirmDelete}>
+              Continue
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
