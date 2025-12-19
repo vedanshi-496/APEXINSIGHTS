@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Input } from "@/components/ui/input";
 import { useFormStatus } from 'react-dom';
 import { Mail } from 'lucide-react';
+import { Card, CardContent } from '../ui/card';
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
@@ -53,9 +54,9 @@ export default function Newsletter() {
   }
 
   return (
-    <section className="bg-muted/40">
-      <div className="container py-12 md:py-16">
-        <div className="max-w-3xl mx-auto text-center">
+    <section className="bg-muted/40 p-8 rounded-lg">
+      <div className="grid md:grid-cols-2 items-center gap-8">
+        <div className="max-w-lg">
             <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl">
               Stay Ahead of the Curve
             </h2>
@@ -63,7 +64,7 @@ export default function Newsletter() {
               Subscribe to our newsletter for the latest industry insights, trends, and exclusive content delivered right to your inbox.
             </p>
         </div>
-        <div className="mt-8 max-w-lg mx-auto">
+        <div className="">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row items-start gap-4">
                 <FormField
@@ -84,7 +85,7 @@ export default function Newsletter() {
                 <SubmitButton />
                 </form>
             </Form>
-            <p className="text-xs text-muted-foreground mt-3 text-center">We respect your privacy. Unsubscribe at any time.</p>
+            <p className="text-xs text-muted-foreground mt-3 text-center sm:text-left">We respect your privacy. Unsubscribe at any time.</p>
         </div>
       </div>
     </section>
