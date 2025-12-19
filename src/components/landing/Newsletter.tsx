@@ -54,38 +54,40 @@ export default function Newsletter() {
   }
 
   return (
-    <section className="bg-muted/40 p-8 rounded-lg">
-      <div className="grid md:grid-cols-2 items-center gap-8">
-        <div className="max-w-lg">
-            <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl">
-              Stay Ahead of the Curve
-            </h2>
-            <p className="mt-4 text-muted-foreground sm:text-xl">
-              Subscribe to our newsletter for the latest industry insights, trends, and exclusive content delivered right to your inbox.
-            </p>
-        </div>
-        <div className="">
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row items-start gap-4">
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                    <FormItem className="flex-1 w-full">
-                        <FormControl>
-                          <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                            <Input className="h-12 pl-10 text-base" placeholder="Enter your email" {...field} />
-                          </div>
-                        </FormControl>
-                        <FormMessage className="text-left" />
-                    </FormItem>
-                    )}
-                />
-                <SubmitButton />
-                </form>
-            </Form>
-            <p className="text-xs text-muted-foreground mt-3 text-center sm:text-left">We respect your privacy. Unsubscribe at any time.</p>
+    <section className="bg-muted/40 py-16 md:py-24">
+      <div className="container">
+        <div className="grid md:grid-cols-2 items-center gap-8">
+            <div className="max-w-lg">
+                <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl">
+                  Stay Ahead of the Curve
+                </h2>
+                <p className="mt-4 text-muted-foreground sm:text-xl">
+                  Subscribe to our newsletter for the latest industry insights, trends, and exclusive content delivered right to your inbox.
+                </p>
+            </div>
+            <div className="">
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row items-start gap-4">
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                        <FormItem className="flex-1 w-full">
+                            <FormControl>
+                              <div className="relative">
+                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                <Input className="h-12 pl-10 text-base" placeholder="Enter your email" {...field} />
+                              </div>
+                            </FormControl>
+                            <FormMessage className="text-left" />
+                        </FormItem>
+                        )}
+                    />
+                    <SubmitButton />
+                    </form>
+                </Form>
+                <p className="text-xs text-muted-foreground mt-3 text-center sm:text-left">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
         </div>
       </div>
     </section>

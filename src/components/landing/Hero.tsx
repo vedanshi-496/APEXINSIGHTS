@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ArrowRight } from 'lucide-react';
-import Newsletter from './Newsletter';
 
 export default function Hero() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-image');
@@ -13,8 +12,7 @@ export default function Hero() {
   return (
     <section id="home" className="py-16 md:py-24">
       <div className="container">
-        <Newsletter />
-        <div className="grid md:grid-cols-2 gap-12 items-center mt-12">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 text-center md:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-headline tracking-tighter">
               Drive Your Business Forward with <span className="text-primary">Apex Insights</span>
